@@ -4,7 +4,7 @@ import eventReducer from "./eventSlice";
 
 export let store = configureStore({
   reducer: {
-    employee: employeeReducer,
     event: eventReducer,
+    employee: employeeReducer,
   },
 });

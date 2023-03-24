@@ -58,7 +58,7 @@ body {
   position: absolute;
   top: 102%;
   right: 0;
-  width: 150%;
+  width: 170%;
   height: auto;
   background-color: #000;
   z-index: 300;
@@ -75,6 +75,7 @@ body {
   width: 100%;
   padding: 12px;
   border-bottom: 1px solid #fff;
+  cursor: pointer;
 }
 
 .header__dropdown__item span {
@@ -85,4 +86,133 @@ body {
 
 .display_none {
   display: none;
+}
+
+.page__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #242222;
+}
+
+.page__container_box {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 700px;
+  background-color: #000;
+  border-radius: 10px;
+  padding: 20px;
+  height: auto;
+}
+
+.page__container_title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  padding: 20px;
+  text-align: left;
+}
+
+.page__container_form {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  width: 100%;
+  height: auto;
+}
+
+.page__container_form__left {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 50%;
+  padding-right: 10px;
+  height: auto;
+  gap: 10px;
+}
+
+.page__container_form__right {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  width: 50%;
+  padding-left: 10px;
+  height: 100%;
+}
+
+.page__container_inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #fff;
+  gap: 10px;
+  position: relative;
+}
+
+.page__container_inputBox label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  position: absolute;
+  top: -10px;
+  background: #000;
+  padding: 0 5px;
+  right: 10px;
+}
+
+.page__container_input_service {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  background: #333232;
+  border-radius: 8px;
+}
+
+.page__container_input_service__left {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #fff;
+}
+
+.page__container_input_service__left__title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e2e206;
+}
+
+.page__container_input_service__left__text {
+  opacity: 0.7;
+  outline: none;
+  background: transparent;
+  border: none;
+}
+
+.page__container_button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  background: #e2e206;
+  border-radius: 16px;
+}
+
+.inputText {
+  border: 1px solid #e2e206;
+  color: red;
 }
