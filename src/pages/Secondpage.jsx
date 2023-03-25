@@ -2,12 +2,16 @@ import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import { MdOutlineArrowDropDown } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
+import LabelGroup from "../components/LabelGroup/LabelGroup";
+import InputFields from "../components/Inputs/Inputs";
 
 const PageTwo = () => {
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       service: "",
+      teamMember: "",
+      description: "",
     },
     onSubmit: (values) => {
       console.log(values);
@@ -19,65 +23,67 @@ const PageTwo = () => {
         <h1 className="page__container_title">Add appointment</h1>
         <form className="page__container_form" onSubmit={handleSubmit}>
           <div className="page__container_form__left">
-            <div className="page__container_inputBox">
-              <label>Service and duration</label>
-              <div className="page__container_input_service">
-                <div className="page__container_input_service__left">
-                  <span className="page__container_input_service__left__title">
-                    Service
-                  </span>
-                  <input
-                    className="page__container_input_service__left__text"
-                    type="text"
-                    placeholder="select a service"
-                    name="service"
-                    onChange={handleChange}
+            <LabelGroup label="Service and duration">
+              <InputFields
+                name="service"
+                handleChange={handleChange}
+                placeholder="select a service"
+                label="Service"
+                onClick={() => {}}
+              />
+            </LabelGroup>
+            <LabelGroup label="Date and time">
+              <div className="page__container_time">
+                <div className="page__container_time_left">
+                  <InputFields
+                    name="date"
+                    handleChange={handleChange}
+                    placeholder="12 march 2021"
+                    label="Date"
+                    onClick={() => {}}
                   />
                 </div>
-                <MdOutlineArrowDropDown fontSize={30} color="#e2e206" />
-              </div>
-            </div>
-            <div className="page__container_inputBox">
-              <label>Date and time</label>
-            </div>
-            <div className="page__container_inputBox teamBox">
-              <label>Team member and notes</label>
-              <div className="page__container_input_service">
-                <div className="page__container_input_service__left">
-                  <span className="page__container_input_service__left__title">
-                    Team member
-                  </span>
-                  <input
-                    className="page__container_input_service__left__text"
-                    type="text"
-                    placeholder="choose a team member"
-                    name="service"
-                    onChange={handleChange}
+                <div className="page__container_time_right">
+                  <InputFields
+                    name="time"
+                    handleChange={handleChange}
+                    placeholder="50 min"
+                    label="Time"
+                    onClick={() => {}}
                   />
                 </div>
-                <MdOutlineArrowDropDown fontSize={30} color="#e2e206" />
               </div>
-              <div className="page__container_input_service">
-                <div className="page__container_input_service__left">
-                  <span className="page__container_input_service__left__title">
-                    Description
-                  </span>
-                  <input
-                    className="page__container_input_service__left__text"
-                    type="text"
-                    placeholder="Write a decription about this appointment"
-                    name="service"
-                    onChange={handleChange}
-                  />
-                </div>
-                <MdOutlineArrowDropDown fontSize={30} color="#e2e206" />
-              </div>
-            </div>
+            </LabelGroup>
+            <LabelGroup label="Team member and notes">
+              <InputFields
+                name="teamMember"
+                handleChange={handleChange}
+                placeholder="choose a team member"
+                label="Team member"
+                onClick={() => {}}
+              />
+
+              <InputFields
+                name="description"
+                handleChange={handleChange}
+                placeholder="Write a description about this appointment"
+                label="Description"
+                onClick={() => {}}
+                textArea={true}
+              />
+            </LabelGroup>
           </div>
           <div className="page__container_form__right">
-            <div className="page__container_inputBox">
-              <label>Add Customer</label>
-            </div>
+            <LabelGroup label="Add Customer">
+              <div className="page__container_customer">
+                <FaSearch fontSize={16} color="#e2e206" />
+                <input
+                  type="text"
+                  placeholder="Enter customer name here"
+                  className="page_container_input"
+                />
+              </div>
+            </LabelGroup>
 
             <button className="page__container_button">Save appointment</button>
           </div>

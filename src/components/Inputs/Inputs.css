@@ -1,0 +1,34 @@
+.inputField {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  background: #333232;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.inputField__left {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #fff;
+}
+
+.inputField__left__title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #e2e206;
+}
+
+.inputField__left__text {
+  opacity: 0.7;
+  outline: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  resize: none;
+}

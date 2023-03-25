@@ -7,6 +7,7 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { addToEvents } from "../redux/eventSlice";
+import { useState } from "react";
 
 const PageOne = ({
   showAddDropdown,
@@ -22,33 +23,40 @@ const PageOne = ({
   const fetchRemote = async (query) => {
     // console.log({ query });
     /**Simulate fetchin remote data */
-    dispatch(
-      addToEvents({
-        event_id: 1,
-        title: "Event 1",
-        start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
-        end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
-        admin_id: 1,
-      })
-    );
+    // dispatch(
+    //   addToEvents({
+    //     event_id: 1,
+    //     title: "Event 1",
+    //     start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
+    //     end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
+    //     admin_id: 1,
+    //   })
+    // );
     return new Promise((res) => {
       setTimeout(() => {
-        res({ events });
+        res(something);
       }, 3000);
     });
   };
 
-  useEffect(() => {
-    dispatch(
-      addToEvents({
-        event_id: 2,
-        title: "Event 1",
-        start: new Date("2023/4/4 10:00"),
-        end: new Date("2023/4/4 11:00"),
-        admin_id: 1,
-      })
-    );
-  }, []);
+  const [something, setSomething] = useState([
+    {
+      event_id: 2,
+      title: "Event 1",
+      start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
+      end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
+      admin_id: 1,
+    },
+    {
+      event_id: 1,
+      title: "Event 1",
+      start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
+      end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
+      admin_id: 2,
+    },
+  ]);
+
+  useEffect(() => {}, []);
 
   return (
     <Fragment>
@@ -98,6 +106,21 @@ const PageOne = ({
             className="header__left__title"
             onClick={() => {
               setShowAddDropdown((prev) => !prev);
+              console.log(something);
+              setSomething([
+                ...something,
+                {
+                  event_id: 3,
+                  title: "Event 3",
+                  start: new Date(
+                    new Date(new Date().setHours(11)).setMinutes(30)
+                  ),
+                  end: new Date(
+                    new Date(new Date().setHours(12)).setMinutes(30)
+                  ),
+                  admin_id: 2,
+                },
+              ]);
             }}
           >
             <span>Add</span>
@@ -123,8 +146,8 @@ const PageOne = ({
         </div>
       </div>
       <Scheduler
-        // getRemoteEvents={fetchRemote}
-        events={events}
+        getRemoteEvents={fetchRemote}
+        // events={something}
         resources={employees}
         view="day"
         resourceFields={{
