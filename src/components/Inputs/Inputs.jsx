@@ -9,6 +9,7 @@ const InputFields = ({
   label,
   onClick,
   textArea = false,
+  type = "text",
 }) => {
   return (
     <div className="inputField">
@@ -25,7 +26,7 @@ const InputFields = ({
         ) : (
           <input
             className="inputField__left__text"
-            type="text"
+            type={type}
             placeholder={placeholder}
             name={name}
             onChange={handleChange}

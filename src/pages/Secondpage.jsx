@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import { FaSearch } from "react-icons/fa";
 import LabelGroup from "../components/LabelGroup/LabelGroup";
 import InputFields from "../components/Inputs/Inputs";
+import { AiOutlinePlus } from "react-icons/ai";
+import CustomerCard from "../components/CustomerCard/CustomerCard";
 
 const PageTwo = () => {
   const { values, handleChange, handleSubmit } = useFormik({
@@ -12,6 +14,8 @@ const PageTwo = () => {
       service: "",
       teamMember: "",
       description: "",
+      time: "",
+      date: "",
     },
     onSubmit: (values) => {
       console.log(values);
@@ -37,6 +41,7 @@ const PageTwo = () => {
                 <div className="page__container_time_left">
                   <InputFields
                     name="date"
+                    type="date"
                     handleChange={handleChange}
                     placeholder="12 march 2021"
                     label="Date"
@@ -46,6 +51,7 @@ const PageTwo = () => {
                 <div className="page__container_time_right">
                   <InputFields
                     name="time"
+                    type="time"
                     handleChange={handleChange}
                     placeholder="50 min"
                     label="Time"
@@ -83,9 +89,30 @@ const PageTwo = () => {
                   className="page_container_input"
                 />
               </div>
+              <div className="page__container_add">
+                <AiOutlinePlus />
+                <span>add new customer</span>
+              </div>
+              <div className="page__container_customer">
+                <CustomerCard />
+              </div>
             </LabelGroup>
-
-            <button className="page__container_button">Save appointment</button>
+            <div className="page__container_details">
+              <div className="page__container_details_content">
+                <div className="page__container_details_content_left">
+                  <h6>Date and time</h6>
+                  <span>{values.date}</span>
+                  <span>{values.time}</span>
+                </div>
+                <div className="page__container_details_content_right">
+                  <h6>Price</h6>
+                  <span>50000000</span>
+                </div>
+              </div>
+              <button className="page__container_button" type="submit">
+                Save appointment
+              </button>
+            </div>
           </div>
         </form>
       </div>

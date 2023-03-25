@@ -190,6 +190,20 @@ body {
   border: none;
 }
 
+.page__container_add {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #2b19c9;
+  font-size: 18px;
+}
+
+.page__container_add span {
+  font-size: 14px;
+}
+
 .page__container_button {
   display: flex;
   flex-direction: row;
@@ -200,6 +214,44 @@ body {
   padding: 10px;
   background: #e2e206;
   border-radius: 16px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+.page__container_details {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.page__container_details_content {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.page__container_details_content_left {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.page__container_details_content_right {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 .inputText {
