@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlineArrowDropDown } from "react-icons/md";
+import CustomerCard from "../CustomerCard/CustomerCard";
 import "./Inputs.css";
 
 const InputFields = ({
@@ -8,8 +9,13 @@ const InputFields = ({
   handleChange,
   label,
   onClick,
+  dropdown,
   textArea = false,
   type = "text",
+  values,
+  setFieldValue,
+  showEmployeeDropdown,
+  setShowEmployeeDropdown,
 }) => {
   return (
     <div className="inputField">
@@ -24,16 +30,43 @@ const InputFields = ({
             rows="4"
           />
         ) : (
-          <input
-            className="inputField__left__text"
-            type={type}
-            placeholder={placeholder}
-            name={name}
-            onChange={handleChange}
-          />
+          <div>
+            {dropdown ? (
+              <span className="inputField__left__text">
+                {dropdown === "team" && values !== "" ? values : placeholder}
+              </span>
+            ) : (
+              <input
+                className="inputField__left__text"
+                type={type}
+                placeholder={placeholder}
+                name={name}
+                onChange={handleChange}
+              />
+            )}
+          </div>
         )}
       </div>
       <MdOutlineArrowDropDown fontSize={30} color="#e2e206" />
+      {dropdown === "team" && showEmployeeDropdown && (
+        <div className="inputField__dropdown">
+          <h5 className="inputField__dropdown_header">Team member</h5>
+          <div className="inputField__dropdown_members">
+            {[1, 2, 3, 4, 5].map((item, index) => (
+              <div
+                className="inputField__dropdown_member_container"
+                key={index}
+                onClick={() => {
+                  setFieldValue("teamMember", "Mitchel Obama");
+                  setShowEmployeeDropdown(false);
+                }}
+              >
+                <CustomerCard customer="Mitchel Obama" noArrow noNumber />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

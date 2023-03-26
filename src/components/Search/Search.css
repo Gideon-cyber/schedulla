@@ -3,6 +3,7 @@
   height: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .search {
@@ -15,4 +16,23 @@
   color: #fff;
   border-radius: 26px;
   gap: 14px;
+}
+
+.search__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  z-index: 1;
+  /* opacity: 0; */
+  cursor: pointer;
+  background: #333232;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+
+.search__dropdown_customer {
+  padding: 10px 20px;
+  border-bottom: 1px solid #fff;
 }

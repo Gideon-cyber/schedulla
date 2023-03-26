@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import LabelGroup from "../../components/LabelGroup/LabelGroup";
 import InputFields from "../../components/Inputs/Inputs";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -13,6 +13,7 @@ import { generateAvatar } from "../../utils";
 import { MdCancel } from "react-icons/md";
 
 const PageTwo = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
@@ -26,6 +27,7 @@ const PageTwo = () => {
     },
     onSubmit: (values) => {
       console.log(values);
+      navigate("/");
     },
   });
   const services = [
@@ -42,6 +44,7 @@ const PageTwo = () => {
               <InputFields
                 // name="service"
                 handleChange={handleChange}
+                dropdown
                 placeholder="select a service"
                 label="Service"
                 onClick={() => {
@@ -97,11 +100,18 @@ const PageTwo = () => {
             </LabelGroup>
             <LabelGroup label="Team member and notes">
               <InputFields
-                name="teamMember"
+                // name="teamMember"
                 handleChange={handleChange}
                 placeholder="choose a team member"
                 label="Team member"
-                onClick={() => {}}
+                dropdown="team"
+                values={values.teamMember}
+                onClick={() => {
+                  setShowEmployeeDropdown(true);
+                }}
+                setFieldValue={setFieldValue}
+                showEmployeeDropdown={showEmployeeDropdown}
+                setShowEmployeeDropdown={setShowEmployeeDropdown}
               />
 
               <InputFields
