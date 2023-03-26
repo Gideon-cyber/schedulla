@@ -16,10 +16,14 @@ const InputFields = ({
   setFieldValue,
   showEmployeeDropdown,
   setShowEmployeeDropdown,
+  noArrow = true,
 }) => {
   return (
-    <div className="inputField">
-      <div className="inputField__left" onClick={onClick}>
+    <div
+      className="inputField"
+      onClick={!showEmployeeDropdown ? onClick : () => {}}
+    >
+      <div className="inputField__left">
         <span className="inputField__left__title">{label}</span>
         {textArea ? (
           <textarea
@@ -47,7 +51,9 @@ const InputFields = ({
           </div>
         )}
       </div>
-      <MdOutlineArrowDropDown fontSize={30} color="#e2e206" />
+      {noArrow === true && (
+        <MdOutlineArrowDropDown fontSize={30} color="#e2e206" />
+      )}
       {dropdown === "team" && showEmployeeDropdown && (
         <div className="inputField__dropdown">
           <h5 className="inputField__dropdown_header">Team member</h5>

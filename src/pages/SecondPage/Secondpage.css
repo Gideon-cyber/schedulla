@@ -33,6 +33,7 @@
   align-items: flex-start;
   width: 100%;
   height: auto;
+  gap: 10px;
 }
 
 .page__container_form__left {
@@ -51,7 +52,7 @@
   align-items: flex-start;
   justify-content: space-between;
   width: 50%;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   height: 100%;
 }
 
@@ -294,4 +295,45 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
+}
+
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+/**********************************************************/
+
+@media screen and (max-width: 776px) {
+  .page__container {
+    height: auto;
+  }
+
+  .page__container_box {
+    width: 100%;
+  }
+
+  .page__container_form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page__container_form__left,
+  .page__container_form__right {
+    width: 100%;
+  }
+
+  .page__container_modal {
+    top: 0;
+    padding: 20px;
+  }
+
+  .page__container_modal_content {
+    width: 100%;
+    margin: 16px;
+  }
 }

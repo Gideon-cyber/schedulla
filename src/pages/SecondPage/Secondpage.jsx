@@ -121,6 +121,7 @@ const PageTwo = () => {
                 label="Description"
                 onClick={() => {}}
                 textArea={true}
+                noArrow={false}
               />
             </LabelGroup>
           </div>
