@@ -8,8 +8,8 @@ import { RESOURCES, EVENTS } from "./data";
 import "./app.css";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PageOne from "./pages/Firstpage";
-import PageTwo from "./pages/Secondpage";
+import PageOne from "./pages/FirstPage/Firstpage";
+import PageTwo from "./pages/SecondPage/Secondpage";
 
 function App() {
   const { resourceViewMode, setResourceViewMode } = useScheduler();

@@ -6,7 +6,7 @@ import { Scheduler, useScheduler } from "@aldabil/react-scheduler";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { addToEvents } from "../redux/eventSlice";
+import { addToEvents } from "../../redux/eventSlice";
 import { useState } from "react";
 
 const PageOne = ({
