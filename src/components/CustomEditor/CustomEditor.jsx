@@ -37,6 +37,10 @@ const CustomEditor = ({
       console.log(values);
       try {
         scheduler.loading(true);
+        const newHour = Number(values.startTime.split(":")[0]);
+        const newMinute = Number(values.startTime.split(":")[1]);
+        const latestHour = Number(values.endTime.split(":")[0]);
+        const latestMinute = Number(values.endTime.split(":")[1]);
 
         /**Simulate remote data saving */
         const added_updated_event = await new Promise((res) => {
@@ -51,8 +55,16 @@ const CustomEditor = ({
           res({
             event_id: event?.event_id || Math.random(),
             title: "New appointment",
-            start: scheduler.state.start.value || values.startTime,
-            end: scheduler.state.end.value || values.endTime,
+            start:
+              new Date(
+                new Date(new Date().setHours(newHour)).setMinutes(newMinute)
+              ) || scheduler.state.start.value,
+            end:
+              new Date(
+                new Date(new Date().setHours(latestHour)).setMinutes(
+                  latestMinute
+                )
+              ) || scheduler.state.end.value,
             description: values.description,
             employeeName: values.employeeName,
             admin_id: employees.filter(

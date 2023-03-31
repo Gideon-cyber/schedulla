@@ -17,6 +17,8 @@ const PageOne = ({
   setShowAddDropdown,
   showDropdown,
   setShowDropdown,
+  something,
+  setSomething,
 }) => {
   let { employees } = useSelector((state: any) => state.employee);
   let { events } = useSelector((state: any) => state.event);
@@ -42,22 +44,7 @@ const PageOne = ({
     });
   };
 
-  const [something, setSomething] = useState([
-    {
-      event_id: 2,
-      title: "Event 1",
-      start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
-      end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
-      admin_id: 1,
-    },
-    {
-      event_id: 1,
-      title: "Event 1",
-      start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
-      end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
-      admin_id: 2,
-    },
-  ]);
+  
 
   useEffect(() => {}, []);
 

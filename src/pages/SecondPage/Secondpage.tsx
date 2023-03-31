@@ -12,16 +12,30 @@ import TimePicker from "react-time-picker";
 import { generateAvatar } from "../../utils";
 import { MdCancel } from "react-icons/md";
 import InputFields from "../../components/Inputs/Inputs";
+import {
+  SchedulerHelpers,
+  ProcessedEvent,
+} from "@aldabil/react-scheduler/types";
+import { useSelector } from "react-redux";
 
 export type initialValues = {
   service: { name: string; duration: string }[];
-  teamMember: string;
+  employeeName: string;
   description: string;
   time: string;
   date: string;
 };
 
-const PageTwo = () => {
+type Props = {
+  scheduler: SchedulerHelpers;
+  something: ProcessedEvent[];
+  setSomething: React.Dispatch<React.SetStateAction<ProcessedEvent[]>>;
+};
+
+const PageTwo = ({ something, setSomething, scheduler }: Props) => {
+  const { employees } = useSelector((state: any) => state.employee);
+  // const event = scheduler.edited;
+
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false);
@@ -31,20 +45,88 @@ const PageTwo = () => {
     useFormik<initialValues>({
       initialValues: {
         service: [],
-        teamMember: "",
+        employeeName: "",
         description: "",
         time: "",
         date: "",
       },
-      onSubmit: (values) => {
+      onSubmit: async (values) => {
         console.log(values);
         // navigate("/");
+        const newHour = Number(parseInt(values.time.split(":")[0]));
+        const newMinute = Number(parseInt(values.time.split(":")[1]));
+        let latestHour = Number(
+          `${values.service[0].duration === "30 mins" && newHour}`
+        );
+        let latestMinute = Number(
+          `${
+            values.service[0].duration === "30 mins"
+              ? newMinute + 30
+              : newMinute + 50
+          }`
+        );
+
+        try {
+          scheduler.loading(true);
+
+          /**Simulate remote data saving */
+          const added_updated_event = (await new Promise((res) => {
+            /**
+             * Make sure the event have 4 mandatory fields
+             * event_id: string|number
+             * title: string
+             * start: Date|string
+             * end: Date|string
+             */
+
+            // start:
+            //     new Date(
+            //       new Date(new Date().setHours(newHour)).setMinutes(newMinute)
+            //     ) || scheduler!.state.start.value,
+            //   end:
+            //     new Date(
+            //       new Date(new Date().setHours(latestHour)).setMinutes(
+            //         latestMinute
+            //       )
+            //     ) || scheduler!.state.end.value,
+
+            res({
+              event_id: Math.random(),
+              title: "New appointment",
+              start:
+                new Date(
+                  new Date(new Date().setHours(newHour)).setMinutes(newMinute)
+                ) || scheduler!.state.start.value,
+              end:
+                new Date(
+                  new Date(new Date().setHours(latestHour)).setMinutes(
+                    latestMinute
+                  )
+                ) || scheduler!.state.end.value,
+              description: values.description,
+              employeeName: values.employeeName,
+              admin_id: employees.filter(
+                (employee) => employee.title === values.employeeName
+              )[0].admin_id,
+            });
+          })) as ProcessedEvent;
+
+          // dispatch({ type: "updateEvent", payload: added_updated_event });
+          setSomething((prev: any) => [...prev, added_updated_event]);
+
+          scheduler.onConfirm(added_updated_event, event ? "edit" : "create");
+          scheduler.close();
+        } finally {
+          scheduler.loading(false);
+          navigate("/");
+        }
       },
     });
   const services = [
     { name: "Hair cut", duration: "50 min" },
     { name: "Beard cut", duration: "30 min" },
   ];
+
   return (
     <div className="page__container">
       <div className="page__container_box">
@@ -112,12 +194,12 @@ const PageTwo = () => {
             </LabelGroup>
             <LabelGroup label="Team member and notes">
               <InputFields
-                name="teamMember"
+                name="employeeName"
                 handleChange={handleChange}
                 placeholder="choose a team member"
                 label="Team member"
                 dropdown="team"
-                values={values.teamMember}
+                values={values.employeeName}
                 onClick={() => {
                   setShowEmployeeDropdown(true);
                 }}

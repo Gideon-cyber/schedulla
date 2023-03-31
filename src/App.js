@@ -18,6 +18,22 @@ function App() {
   let { employees } = useSelector((state) => state.employee);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showAddDropdown, setShowAddDropdown] = useState(false);
+  const [something, setSomething] = useState([
+    {
+      event_id: 2,
+      title: "Event 1",
+      start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
+      end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
+      admin_id: 1,
+    },
+    {
+      event_id: 1,
+      title: "Event 1",
+      start: new Date(new Date(new Date().setHours(9)).setMinutes(30)),
+      end: new Date(new Date(new Date().setHours(10)).setMinutes(30)),
+      admin_id: 2,
+    },
+  ]);
 
   return (
     <Router>
@@ -30,10 +46,17 @@ function App() {
               setShowAddDropdown={setShowAddDropdown}
               showDropdown={showDropdown}
               setShowDropdown={setShowDropdown}
+              something={something}
+              setSomething={setSomething}
             />
           }
         />
-        <Route path="/2" element={<PageTwo />} />
+        <Route
+          path="/2"
+          element={
+            <PageTwo something={something} setSomething={setSomething} />
+          }
+        />
       </Routes>
     </Router>
   );
