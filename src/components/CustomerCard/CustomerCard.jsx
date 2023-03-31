@@ -5,8 +5,8 @@ import "./CustomerCard.css";
 import { generateAvatar } from "../../utils";
 
 const CustomerCard = ({
-  noArrow,
-  noNumber,
+  noArrow = true,
+  noNumber = false,
   customer = "Marcus Rashford",
   number = 103123456,
 }) => {

@@ -8,6 +8,9 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { addToEvents } from "../../redux/eventSlice";
 import { useState } from "react";
+import { FieldProps } from "@aldabil/react-scheduler/types";
+import CustomEditor from "../../components/CustomEditor/CustomEditor";
+// import CustomEditor from "../../components/CustomEditor/CustomEditor";
 
 const PageOne = ({
   showAddDropdown,
@@ -15,8 +18,8 @@ const PageOne = ({
   showDropdown,
   setShowDropdown,
 }) => {
-  let { employees } = useSelector((state) => state.employee);
-  let { events } = useSelector((state) => state.event);
+  let { employees } = useSelector((state: any) => state.employee);
+  let { events } = useSelector((state: any) => state.event);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -146,10 +149,20 @@ const PageOne = ({
         </div>
       </div>
       <Scheduler
-        getRemoteEvents={fetchRemote}
-        // events={something}
+        // getRemoteEvents={fetchRemote}
+        customEditor={(scheduler) => (
+          <CustomEditor scheduler={scheduler} setSomething={setSomething} />
+        )}
+        events={something}
         resources={employees}
         view="day"
+        day={{
+          startHour: 0,
+          endHour: 23,
+          step: 60,
+          // cellRenderer: (props) => jsx("div", { ...props }),
+          navigation: true,
+        }}
         resourceFields={{
           idField: "admin_id",
           textField: "title",
@@ -172,34 +185,24 @@ const PageOne = ({
             config: { label: "Assignee", required: true },
           },
         ]}
-        viewerExtraComponent={(fields, event) => {
+        viewerExtraComponent={(fields: FieldProps[], event) => {
           return (
             <div>
               {fields.map((field, i) => {
                 if (field.name === "admin_id") {
-                  const admin = field.options.find(
+                  const admin = field!.options!.find(
                     (fe) => fe.id === event.admin_id
                   );
                   return (
-                    // <Typography
-                    //   key={i}
-                    //   style={{
-                    //     display: "flex",
-                    //     alignItems: "center",
-                    //     msFlexDirection: "column",
-                    //     flexDirection: "column",
-                    //   }}
-                    //   color="textSecondary"
-                    //   flexDirection={"column"}
-                    //   variant="caption"
-                    //   noWrap
-                    // >
-                    //   <PersonRoundedIcon /> {admin.text}
-                    // </Typography>
-                    <div key={i}>
-                      <PersonRoundedIcon />
-                      <div>{admin.text}</div>
-                    </div>
+                    <Typography
+                      key={i}
+                      style={{ display: "flex", alignItems: "center" }}
+                      color="textSecondary"
+                      variant="caption"
+                      noWrap
+                    >
+                      <PersonRoundedIcon /> {admin!.text}
+                    </Typography>
                   );
                 } else {
                   return "";

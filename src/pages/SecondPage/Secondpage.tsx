@@ -4,32 +4,43 @@ import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import LabelGroup from "../../components/LabelGroup/LabelGroup";
-import InputFields from "../../components/Inputs/Inputs";
 import { AiOutlinePlus } from "react-icons/ai";
 import CustomerCard from "../../components/CustomerCard/CustomerCard";
 import Search from "../../components/Search/Search";
 import "./Secondpage.css";
+import TimePicker from "react-time-picker";
 import { generateAvatar } from "../../utils";
 import { MdCancel } from "react-icons/md";
+import InputFields from "../../components/Inputs/Inputs";
+
+export type initialValues = {
+  service: { name: string; duration: string }[];
+  teamMember: string;
+  description: string;
+  time: string;
+  date: string;
+};
 
 const PageTwo = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-  const { values, handleChange, handleSubmit, setFieldValue } = useFormik({
-    initialValues: {
-      service: [],
-      teamMember: "",
-      description: "",
-      time: "",
-      date: "",
-    },
-    onSubmit: (values) => {
-      console.log(values);
-      navigate("/");
-    },
-  });
+  const [value, onChange] = useState(new Date().getHours() + ":00" || "");
+  const { values, handleChange, handleSubmit, setFieldValue } =
+    useFormik<initialValues>({
+      initialValues: {
+        service: [],
+        teamMember: "",
+        description: "",
+        time: "",
+        date: "",
+      },
+      onSubmit: (values) => {
+        console.log(values);
+        // navigate("/");
+      },
+    });
   const services = [
     { name: "Hair cut", duration: "50 min" },
     { name: "Beard cut", duration: "30 min" },
@@ -44,7 +55,7 @@ const PageTwo = () => {
               <InputFields
                 // name="service"
                 handleChange={handleChange}
-                dropdown
+                // dropdown
                 placeholder="select a service"
                 label="Service"
                 onClick={() => {
@@ -55,7 +66,7 @@ const PageTwo = () => {
                 <div className="page__container_service">
                   <div className="page__container_service_left">
                     <h4>Service</h4>
-                    <span>{values.service[0].name}</span>
+                    <span>{values.service[0]?.name}</span>
                   </div>
                   <div className="page__container_service_right">
                     <div className="page__container_service_left">
@@ -94,13 +105,14 @@ const PageTwo = () => {
                     placeholder="50 min"
                     label="Time"
                     onClick={() => {}}
+                    setFieldValue={setFieldValue}
                   />
                 </div>
               </div>
             </LabelGroup>
             <LabelGroup label="Team member and notes">
               <InputFields
-                // name="teamMember"
+                name="teamMember"
                 handleChange={handleChange}
                 placeholder="choose a team member"
                 label="Team member"
