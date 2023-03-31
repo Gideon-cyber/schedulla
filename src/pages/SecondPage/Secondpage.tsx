@@ -34,7 +34,7 @@ type Props = {
 
 const PageTwo = ({ something, setSomething, scheduler }: Props) => {
   const { employees } = useSelector((state: any) => state.employee);
-  // const event = scheduler.edited;
+  // const event = scheduler!.edited;
 
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -55,9 +55,7 @@ const PageTwo = ({ something, setSomething, scheduler }: Props) => {
         // navigate("/");
         const newHour = Number(parseInt(values.time.split(":")[0]));
         const newMinute = Number(parseInt(values.time.split(":")[1]));
-        let latestHour = Number(
-          `${values.service[0].duration === "30 mins" && newHour}`
-        );
+        let latestHour = Number(`${newHour}`);
         let latestMinute = Number(
           `${
             values.service[0].duration === "30 mins"
@@ -67,8 +65,6 @@ const PageTwo = ({ something, setSomething, scheduler }: Props) => {
         );
 
         try {
-          scheduler.loading(true);
-
           /**Simulate remote data saving */
           const added_updated_event = (await new Promise((res) => {
             /**
@@ -114,11 +110,11 @@ const PageTwo = ({ something, setSomething, scheduler }: Props) => {
           // dispatch({ type: "updateEvent", payload: added_updated_event });
           setSomething((prev: any) => [...prev, added_updated_event]);
 
-          scheduler.onConfirm(added_updated_event, event ? "edit" : "create");
-          scheduler.close();
-        } finally {
-          scheduler.loading(false);
+          // scheduler.onConfirm(added_updated_event, event ? "edit" : "create");
+          // scheduler.close();
           navigate("/");
+        } catch (error) {
+          console.log(error);
         }
       },
     });
